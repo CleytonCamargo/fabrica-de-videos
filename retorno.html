@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Conectando · Fábrica de Vídeos</title>
+  <link rel="icon" href="bolinha.png">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <main>
+    <h1>Conectando a conta…</h1>
+    <p id="mensagem">Você vai voltar para a Fábrica de Vídeos no seu computador em instantes.</p>
+  </main>
+  <script>
+    // O Instagram exige um endereço HTTPS de retorno. Esta página só repassa o código
+    // do login para a API que roda no computador do dono (http://localhost:8000).
+    var parametros = window.location.search;
+    if (parametros.indexOf("code=") === -1 && parametros.indexOf("error") === -1) {
+      document.getElementById("mensagem").textContent = "Nenhum código de login recebido.";
+    } else {
+      window.location.replace("http://localhost:8000/api/plataformas/instagram/retorno" + parametros);
+    }
+  </script>
+</body>
+</html>
